@@ -1,5 +1,7 @@
 package org.kehrbusch.controllers;
 
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.ConsumptionProbe;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,7 +13,9 @@ import org.kehrbusch.entities.*;
 import org.kehrbusch.exceptions.EmptyResultException;
 import org.kehrbusch.exceptions.InputException;
 import org.kehrbusch.exceptions.InternalServerError;
+import org.kehrbusch.exceptions.RateLimitException;
 import org.kehrbusch.mapper.ResultMapper;
+import org.kehrbusch.services.RateLimitService;
 import org.kehrbusch.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,12 +34,14 @@ public class SearchController {
     private static final Logger logger = Logger.getLogger(SearchController.class.getName());
 
     private final SearchService searchService;
+    private final RateLimitService rateLimitService;
     private final ResultMapper mapper;
 
     @Autowired
-    public SearchController(SearchService searchService, ResultMapper mapper){
+    public SearchController(SearchService searchService, RateLimitService rateLimitService, ResultMapper mapper){
         this.mapper = mapper;
         this.searchService = searchService;
+        this.rateLimitService = rateLimitService;
     }
 
     @Operation(summary = "Search request when the zip code and the street are known.", operationId = "searchZipStreet")
@@ -47,11 +53,18 @@ public class SearchController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "There is no address matching the ZipStreet.",
                     content = @Content),
+            @ApiResponse(responseCode = "429", description = "Too many requests per minute."),
             @ApiResponse(responseCode = "500", description = "Internal Server Error.",
                     content = @Content)
     })
     @PostMapping("/search/zipstreet")
-    public SearchResult search(@RequestBody ZipStreetRequest zipStreetRequest) throws InternalServerError, InputException, EmptyResultException {
+    public SearchResult search(@RequestBody ZipStreetRequest zipStreetRequest) throws InternalServerError, InputException, EmptyResultException, RateLimitException {
+        Bucket bucket = this.rateLimitService.resolveBucket();
+        ConsumptionProbe probe = bucket.tryConsumeAndReturnRemaining(1);
+        if (!probe.isConsumed()){
+           throw new RateLimitException("Rate limit for API requests has been exceeded.");
+        }
+
         Result result = searchService.search(zipStreetRequest.getZip(), zipStreetRequest.getStreet(), zipStreetRequest.getCountry(),
                 zipStreetRequest.getMaxErrors(), zipStreetRequest.getNoOfResults());
         if (result.getAddresses().isEmpty()) throw new EmptyResultException("No address is matching.");
@@ -67,11 +80,18 @@ public class SearchController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "There is no address matching the ZipStreet.",
                     content = @Content),
+            @ApiResponse(responseCode = "429", description = "Too many requests per minute."),
             @ApiResponse(responseCode = "500", description = "Internal Server Error.",
                     content = @Content)
     })
     @PostMapping("/search/zipstreetcity")
-    public SearchResult search(@RequestBody ZipStreetCityRequest zipStreetCityRequest) throws InternalServerError, InputException, EmptyResultException {
+    public SearchResult search(@RequestBody ZipStreetCityRequest zipStreetCityRequest) throws InternalServerError, InputException, EmptyResultException, RateLimitException {
+        Bucket bucket = this.rateLimitService.resolveBucket();
+        ConsumptionProbe probe = bucket.tryConsumeAndReturnRemaining(1);
+        if (!probe.isConsumed()){
+            throw new RateLimitException("Rate limit for API requests has been exceeded.");
+        }
+
         Result result = searchService.search(zipStreetCityRequest.getZip(), zipStreetCityRequest.getStreet(),
                 zipStreetCityRequest.getCity(), zipStreetCityRequest.getCountry(), zipStreetCityRequest.getMaxErrors(), zipStreetCityRequest.getNoOfResults());
         if (result.getAddresses().isEmpty()) throw new EmptyResultException("No address is matching.");

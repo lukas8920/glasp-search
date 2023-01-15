@@ -46,14 +46,14 @@ public class SearchService {
         if (zip == null || zip.equals("")) throw new InputException("No Zip Code provided.");
         if (zip.length() > 8) throw new InputException("Provided Zip Code is invalid");
         if (street == null || street.equals("")) throw new InputException("No Street provided.");
-        if (street.length() > 30) throw new InputException("The street is exceeding the maximum allowed length.");
+        if (street.length() > 40) throw new InputException("The street is exceeding the maximum allowed length.");
         if (noOfResults <= 0 || noOfResults > 10) throw new InputException("No of Results requested is not within the allowed range.");
         if (maxErrors < 0 || maxErrors > 6) throw new InputException("No of maximum allowed errors is not within the allowed range.");
     }
 
     private void checkUserInputCity(String city) throws InputException{
         if (city == null || city.equals("")) throw new InputException("No City provided.");
-        if (city.length() > 30) throw new InputException("The city is exceeding the maximum allowed length.");
+        if (city.length() > 40) throw new InputException("The city is exceeding the maximum allowed length.");
     }
 
     private List<String> getAuthorities(){

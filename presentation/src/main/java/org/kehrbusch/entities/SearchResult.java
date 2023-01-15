@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResult {
-    private final List<Addresses> addresses;
+    private final List<Address> addresses;
 
     public SearchResult() {
         this.addresses = new ArrayList<>();
     }
 
-    public List<Addresses> getAddressApis() {
+    public List<Address> getAddresses() {
         return addresses;
     }
 
-    public void addAddresses(List<Addresses> addresses){
+    public void addAddresses(List<Address> addresses){
         this.addresses.addAll(addresses);
     }
 }

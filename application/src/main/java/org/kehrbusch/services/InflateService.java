@@ -2,7 +2,7 @@ package org.kehrbusch.services;
 
 import org.kehrbusch.DataProvider;
 import org.kehrbusch.InitialCityLoader;
-import org.kehrbusch.entities.Address;
+import org.kehrbusch.entities.AddressDomain;
 import org.kehrbusch.entities.City;
 import org.kehrbusch.entities.Roles;
 import org.kehrbusch.exceptions.InternalServerError;
@@ -53,15 +53,15 @@ public class InflateService {
             File file = new File(pathToInitialStreetData);
             InputStream inputStream = new FileInputStream(file);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            List<Address> addresses = new ArrayList<>();
+            List<AddressDomain> addressDomains = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] segments = line.split(",");
-                Address address = new Address(segments[0], segments[3], segments[4], null, segments[1], 0, false);
-                addresses.add(address);
+                AddressDomain addressDomain = new AddressDomain(segments[0], segments[3], segments[4], null, segments[1], 0, false);
+                addressDomains.add(addressDomain);
             }
-            this.searchRepository.persistAll(addresses);
-            addresses.clear();
+            this.searchRepository.persistAll(addressDomains);
+            addressDomains.clear();
         } catch (IOException e){
             logger.warning("Error during loading of initial data.");
         }

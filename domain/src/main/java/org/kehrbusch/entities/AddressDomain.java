@@ -1,6 +1,6 @@
 package org.kehrbusch.entities;
 
-public class Address {
+public class AddressDomain {
     private String regionIdentifier;
     private String zip;
     private String street;
@@ -11,9 +11,9 @@ public class Address {
     //contains zip + street + city
     private boolean hasEnded;
 
-    public Address(){}
+    public AddressDomain(){}
 
-    public Address(String regionIdentifier, String zip, String street, String city, String country, int falseChars, boolean hasEnded){
+    public AddressDomain(String regionIdentifier, String zip, String street, String city, String country, int falseChars, boolean hasEnded){
         this.regionIdentifier = regionIdentifier;
         this.zip = zip;
         this.street = street;
@@ -25,8 +25,8 @@ public class Address {
 
     @Override
     public boolean equals(Object object){
-        Address address = (Address) object;
-        return address.getZip().equals(this.zip) && address.getStreet().equals(this.street);
+        AddressDomain addressDomain = (AddressDomain) object;
+        return addressDomain.getZip().equals(this.zip) && addressDomain.getStreet().equals(this.street);
     }
 
     @Override

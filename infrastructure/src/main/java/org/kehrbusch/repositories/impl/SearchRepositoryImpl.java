@@ -1,6 +1,6 @@
 package org.kehrbusch.repositories.impl;
 
-import org.kehrbusch.entities.Address;
+import org.kehrbusch.entities.AddressDomain;
 import org.kehrbusch.entities.AddressH2;
 import org.kehrbusch.entities.loader.CharElement;
 import org.kehrbusch.entities.loader.LastElement;
@@ -45,14 +45,14 @@ public class SearchRepositoryImpl implements SearchRepository {
     }
 
     @Override
-    public void persist(Address address) {
-        AddressH2 addressH2 = this.h2AddressMapper.map(address);
+    public void persist(AddressDomain addressDomain) {
+        AddressH2 addressH2 = this.h2AddressMapper.map(addressDomain);
         this.addressH2Repository.save(addressH2);
     }
 
     @Override
-    public void persistAll(List<Address> addresses) {
-        this.addressH2Repository.saveAll(addresses
+    public void persistAll(List<AddressDomain> addressDomains) {
+        this.addressH2Repository.saveAll(addressDomains
                 .stream()
                 .map(this.h2AddressMapper::map)
                 .collect(Collectors.toList()));

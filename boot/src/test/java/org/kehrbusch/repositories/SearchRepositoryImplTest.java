@@ -2,7 +2,7 @@ package org.kehrbusch.repositories;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.kehrbusch.entities.Address;
+import org.kehrbusch.entities.AddressDomain;
 import org.kehrbusch.entities.loader.CharElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,19 +23,19 @@ public class SearchRepositoryImplTest {
 
     @Test
     public void testThatGetRootsWorks(){
-        Address a1 = new Address("123", "123", "Test", null, "IT", 0, false);
-        Address a2 = new Address("123", "124", "Test", null, "IT", 0, false);
-        Address a3 = new Address("123", "125", "Test", null, "IT", 0, false);
-        Address a4 = new Address("123", "126", "Test", null, "IT", 0, false);
-        Address a5 = new Address("123", "127", "Test", null, "IT", 0, false);
-        Address a6 = new Address("123", "128", "Test", null, "IT", 0, false);
-        Address a7 = new Address("123", "129", "Test", null, "IT", 0, false);
-        Address a8 = new Address("123", "130", "Test", null, "IT", 0, false);
-        Address a9 = new Address("123", "131", "Test", null, "IT", 0, false);
-        Address a10 = new Address("123", "132", "Test", null, "IT", 0, false);
+        AddressDomain a1 = new AddressDomain("123", "123", "Test", null, "IT", 0, false);
+        AddressDomain a2 = new AddressDomain("123", "124", "Test", null, "IT", 0, false);
+        AddressDomain a3 = new AddressDomain("123", "125", "Test", null, "IT", 0, false);
+        AddressDomain a4 = new AddressDomain("123", "126", "Test", null, "IT", 0, false);
+        AddressDomain a5 = new AddressDomain("123", "127", "Test", null, "IT", 0, false);
+        AddressDomain a6 = new AddressDomain("123", "128", "Test", null, "IT", 0, false);
+        AddressDomain a7 = new AddressDomain("123", "129", "Test", null, "IT", 0, false);
+        AddressDomain a8 = new AddressDomain("123", "130", "Test", null, "IT", 0, false);
+        AddressDomain a9 = new AddressDomain("123", "131", "Test", null, "IT", 0, false);
+        AddressDomain a10 = new AddressDomain("123", "132", "Test", null, "IT", 0, false);
 
-        Address[] addresses = {a1, a2, a3, a4, a5, a6, a7, a8, a9, a10};
-        Arrays.stream(addresses).forEach(address -> this.searchRepository.persist(address));
+        AddressDomain[] addressDomains = {a1, a2, a3, a4, a5, a6, a7, a8, a9, a10};
+        Arrays.stream(addressDomains).forEach(address -> this.searchRepository.persist(address));
 
         List<CharElement> roots = this.searchRepository.getRoots();
 

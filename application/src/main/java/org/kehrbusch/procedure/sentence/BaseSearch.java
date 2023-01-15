@@ -1,6 +1,6 @@
 package org.kehrbusch.procedure.sentence;
 
-import org.kehrbusch.entities.Address;
+import org.kehrbusch.entities.AddressDomain;
 import org.kehrbusch.entities.City;
 import org.kehrbusch.entities.CityWrapper;
 import org.kehrbusch.entities.Result;
@@ -35,7 +35,7 @@ public abstract class BaseSearch {
             //logger.info("Base Search zip " + segments[0] + " - street " + segments[1]);
             CityWrapper wrapper = mapper.identify(this.result.getSearchCity());
 
-            return this.result.addAddress(new Address(regionIdentifier, segments[0], segments[1], wrapper.getCity(),
+            return this.result.addAddress(new AddressDomain(regionIdentifier, segments[0], segments[1], wrapper.getCity(),
                     wrapper.getCountry(), result.getDistance(), isEmpty));
         }
         return false;

@@ -1,7 +1,7 @@
 package org.kehrbusch.procedure;
 
 import org.junit.Test;
-import org.kehrbusch.entities.Address;
+import org.kehrbusch.entities.AddressDomain;
 import org.kehrbusch.entities.Result;
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class ResultTest {
     public void testThatAddAddressIsWorking(){
         Result result = new Result(" , ", "IT");
 
-        result.addAddress(new Address("123", "1234", "test", "test", "Test", 4, true));
-        result.addAddress(new Address("123", "123", "test", "test", "Test", 0, true));
-        result.addAddress(new Address("123", "1234", "test", "test", "Test", 2, true));
+        result.addAddress(new AddressDomain("123", "1234", "test", "test", "Test", 4, true));
+        result.addAddress(new AddressDomain("123", "123", "test", "test", "Test", 0, true));
+        result.addAddress(new AddressDomain("123", "1234", "test", "test", "Test", 2, true));
 
         //assertThat(result.getMinFalseChars(), is(4));
         assertThat(result.getAddresses().size(), is(3));
@@ -31,9 +31,9 @@ public class ResultTest {
     public void testThatAddAddressIsWorkingForCombinationOfEndedNotEnded(){
         Result result = new Result(" , ", "IT");
 
-        result.addAddress(new Address("123", "1234","test","test","Test", 4, true));
-        result.addAddress(new Address("123", "123","test","test","Test", 0, false));
-        result.addAddress(new Address("123", "12345","test","test","Test",0,true));
+        result.addAddress(new AddressDomain("123", "1234","test","test","Test", 4, true));
+        result.addAddress(new AddressDomain("123", "123","test","test","Test", 0, false));
+        result.addAddress(new AddressDomain("123", "12345","test","test","Test",0,true));
 
         assertThat(result.getAddresses().size(), is(3));
         assertThat(result.getAddresses().get(0).getFalseChars(), is(0));
@@ -48,9 +48,9 @@ public class ResultTest {
     public void testThatAddAddressIsWorkingWithReversedEndedAndNotEnded(){
         Result result = new Result(" , ", "IT");
 
-        result.addAddress(new Address("123", "1234","test","test","Test", 4, true));
-        result.addAddress(new Address("123", "123","test","test","Test", 0, true));
-        result.addAddress(new Address("123", "12345","test","test","Test",0,false));
+        result.addAddress(new AddressDomain("123", "1234","test","test","Test", 4, true));
+        result.addAddress(new AddressDomain("123", "123","test","test","Test", 0, true));
+        result.addAddress(new AddressDomain("123", "12345","test","test","Test",0,false));
 
         assertThat(result.getAddresses().size(), is(3));
         assertThat(result.getAddresses().get(0).getFalseChars(), is(0));
@@ -63,16 +63,16 @@ public class ResultTest {
 
     @Test
     public void testThatContainsWorks(){
-        List<Address> addresses = new ArrayList<>();
-        Address address = new Address("123", "1", "test", "test", "it", 0, true);
-        Address address1 = new Address("123", "1","test", "test1", "de", 0, true);
+        List<AddressDomain> addressDomains = new ArrayList<>();
+        AddressDomain addressDomain = new AddressDomain("123", "1", "test", "test", "it", 0, true);
+        AddressDomain addressDomain1 = new AddressDomain("123", "1","test", "test1", "de", 0, true);
 
-        addresses.add(address);
+        addressDomains.add(addressDomain);
 
-        if (!addresses.contains(address1)){
-            addresses.add(address1);
+        if (!addressDomains.contains(addressDomain1)){
+            addressDomains.add(addressDomain1);
         }
 
-        assertThat(addresses.size(), is(1));
+        assertThat(addressDomains.size(), is(1));
     }
 }

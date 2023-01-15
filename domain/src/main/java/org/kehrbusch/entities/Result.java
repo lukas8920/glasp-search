@@ -14,7 +14,7 @@ public class Result {
     private final String searchCountry;
     private int sizeOfResults = 5;
     private String searchCity;
-    private final List<Address> addresses = new ArrayList<>();
+    private final List<AddressDomain> addressDomains = new ArrayList<>();
 
     private AtomicInteger minFalseChars = new AtomicInteger(6);
     private final AtomicBoolean hasFreeSpace = new AtomicBoolean(true);
@@ -61,8 +61,8 @@ public class Result {
 
     public String getSearchCountry(){return this.searchCountry;}
 
-    public List<Address> getAddresses(){
-        return this.addresses;
+    public List<AddressDomain> getAddresses(){
+        return this.addressDomains;
     }
 
     public int getSpaceForAddresses(){
@@ -77,19 +77,19 @@ public class Result {
         return hasFreeSpace.get();
     }
 
-    public boolean addAddress(Address address){
+    public boolean addAddress(AddressDomain addressDomain){
         boolean flag = false;
         lock.writeLock().lock();
         try {
-            if (address.getFalseChars() < this.getMinFalseChars() || this.hasFreeSpace()
-                && !this.addresses.contains(address)){
+            if (addressDomain.getFalseChars() < this.getMinFalseChars() || this.hasFreeSpace()
+                && !this.addressDomains.contains(addressDomain)){
                 //System.out.println(address.getZip() + "," + address.getStreet() + "," + address.getFalseChars() + "," + minFalseChars + "," + freeSpace);
-                flag = this.addresses.add(address);
-                this.hasFreeSpace.set(addresses.size() < sizeOfResults);
-                this.addresses.sort(comparator);
-                if (addresses.size() > sizeOfResults){
-                    this.addresses.remove(this.addresses.size() - 1);
-                    this.minFalseChars.set(this.addresses.get(this.addresses.size() - 1).getFalseChars());
+                flag = this.addressDomains.add(addressDomain);
+                this.hasFreeSpace.set(addressDomains.size() < sizeOfResults);
+                this.addressDomains.sort(comparator);
+                if (addressDomains.size() > sizeOfResults){
+                    this.addressDomains.remove(this.addressDomains.size() - 1);
+                    this.minFalseChars.set(this.addressDomains.get(this.addressDomains.size() - 1).getFalseChars());
                 }
             }
         } finally {
@@ -98,7 +98,7 @@ public class Result {
         return flag;
     }
 
-    Comparator<Address> comparator = (a1, a2) -> {
+    Comparator<AddressDomain> comparator = (a1, a2) -> {
         if (a1.getFalseChars() < a2.getFalseChars()) {
             return -1;
         } else if (a1.getFalseChars() == a2.getFalseChars()) {

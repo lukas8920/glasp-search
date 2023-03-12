@@ -21,6 +21,10 @@
             <groupId>org.kehrbusch</groupId>
             <artifactId>application</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.kehrbusch</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>

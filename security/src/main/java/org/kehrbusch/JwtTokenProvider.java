@@ -1,6 +1,7 @@
 package org.kehrbusch;
 
 import io.jsonwebtoken.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.kehrbusch.entities.Jwt;
 import org.kehrbusch.util.InvalidationException;
 import org.kehrbusch.entities.Roles;
@@ -15,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;

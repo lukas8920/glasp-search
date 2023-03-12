@@ -1,5 +1,7 @@
 package org.kehrbusch.repositories.impl;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.kehrbusch.entities.AddressDomain;
 import org.kehrbusch.entities.AddressH2;
 import org.kehrbusch.entities.loader.CharElement;
@@ -10,8 +12,6 @@ import org.kehrbusch.repositories.queries.AddressH2Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;

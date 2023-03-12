@@ -7,7 +7,7 @@
     <groupId>org.kehrbusch</groupId>
     <artifactId>AddressService</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.21</version>
     <modules>
         <module>application</module>
         <module>domain</module>
@@ -39,6 +39,7 @@
         <retrofit.version>2.9.0</retrofit.version>
         <spring.version>6.0.6</spring.version>
         <spring.boot.version>3.0.4</spring.boot.version>
+        <spring.security.version>6.0.2</spring.security.version>
         <springdoc.version>1.6.15</springdoc.version>
     </properties>
 

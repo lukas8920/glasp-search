@@ -31,11 +31,10 @@ public class H2JwtMapper {
     private List<Roles> map(List<String> roles){
         List<Roles> tmpRoles = new ArrayList<>();
         roles.forEach(role -> {
-            switch (role){
-                case "CLIENT":
-                    tmpRoles.add(Roles.CLIENT);
-                case "ADMIN":
-                    tmpRoles.add(Roles.ADMIN);
+            if (role.equals("CLIENT")){
+                tmpRoles.add(Roles.CLIENT);
+            } else if (role.equals("ADMIN")) {
+                tmpRoles.add(Roles.ADMIN);
             }
         });
         return tmpRoles;
@@ -44,11 +43,10 @@ public class H2JwtMapper {
     private List<String> mapRoles(List<Roles> roles){
         List<String> tmpRoles = new ArrayList<>();
         roles.forEach(role -> {
-            switch (role){
-                case CLIENT:
-                    tmpRoles.add("CLIENT");
-                case ADMIN:
-                    tmpRoles.add("ADMIN");
+            if (role.equals(Roles.CLIENT)){
+                tmpRoles.add("CLIENT");
+            } else if (role.equals(Roles.ADMIN)) {
+                 tmpRoles.add("ADMIN");
             }
         });
         return tmpRoles;

@@ -82,6 +82,14 @@ public class InflateService {
         logger.info("Finished initializing the city data.");
     }
 
+    public void reload() throws InternalServerError {
+        if (!profile.equals("dev") && !getAuthorities().contains(Roles.ADMIN.toString())) throw new InternalServerError("Internal Server Error");
+
+        this.dataProvider.initCityData();
+        this.dataProvider.initZipStreetData();
+        logger.info("Finished reloading of the address data.");
+    }
+
     private List<String> getAuthorities(){
         return SecurityContextHolder.getContext().getAuthentication().getAuthorities()
                 .stream()

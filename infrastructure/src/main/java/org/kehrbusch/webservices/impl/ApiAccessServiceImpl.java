@@ -34,7 +34,7 @@ public class ApiAccessServiceImpl implements ApiAccessService {
     @Override
     public ApiAccess findAdminApiAccess(ApiAccess apiAccess) throws IOException {
         AccessApi accessApi = this.authorizeService
-                .authorizeUser(this.accessApiMapper.map(apiAccess)).execute().body();
+                .authorizeAdmin(this.accessApiMapper.map(apiAccess)).execute().body();
         return accessApi != null ? this.accessApiMapper.map(accessApi) : null;
     }
 }

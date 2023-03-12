@@ -51,4 +51,10 @@ public class DatabaseController {
         this.inflateService.initCity();
         return null;
     }
+
+    @PostMapping(value = "/reload")
+    public Void reload() throws InternalServerError {
+        this.inflateService.reload();
+        return null;
+    }
 }

@@ -20,10 +20,10 @@
     <properties>
         <apache.commons>1.10.0</apache.commons>
         <bucket4j.version>7.6.0</bucket4j.version>
-        <caffeine.version>3.1.1</caffeine.version>
-        <glassfish.version>4.0.1</glassfish.version>
+        <caffeine.version>3.1.5</caffeine.version>
+        <glassfish.version>4.0.2</glassfish.version>
         <guava.version>31.1-jre</guava.version>
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.1.214</h2.version>
         <io.jsonwebtoken>0.9.1</io.jsonwebtoken>
         <jackson.version>2.14.0-rc2</jackson.version>
         <javax.activation>1.2.0</javax.activation>
@@ -31,15 +31,15 @@
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <javax.xml.bind>2.4.0-b180830.0359</javax.xml.bind>
         <junit.version>4.13.2</junit.version>
-        <mariadb.version>3.0.8</mariadb.version>
+        <mariadb.version>3.1.2</mariadb.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <okhttp.version>4.10.0</okhttp.version>
-        <projectreactor.version>3.4.24</projectreactor.version>
+        <projectreactor.version>3.5.3</projectreactor.version>
         <retrofit.version>2.9.0</retrofit.version>
         <spring.version>6.0.6</spring.version>
         <spring.boot.version>3.0.4</spring.boot.version>
-        <springdoc.version>1.6.12</springdoc.version>
+        <springdoc.version>1.6.15</springdoc.version>
     </properties>
 
     <dependencies>
